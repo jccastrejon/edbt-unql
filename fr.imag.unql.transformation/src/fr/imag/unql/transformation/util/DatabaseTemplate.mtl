@@ -1,0 +1,15 @@
+[comment encoding = UTF-8 /]
+[module DatabaseTemplate('http://www.imag.fr/Unql')]
+
+
+[**
+ * 
+*/]
+[query public executeGraphQuery(relationName : String, attributes : Sequence(String)) : String = 
+	'TODO: Actual invocation...'  /]
+
+[**
+ * 
+*/]
+[query public executeDocumentQuery(relationName : String, attributes : Sequence(String)) : String = 
+	'TODO: Actual invocation...'  /]

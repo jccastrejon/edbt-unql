@@ -1,0 +1,33 @@
+[comment encoding = UTF-8 /]
+[module UtilTemplate('http://www.imag.fr/Unql')]
+
+[**
+ * 
+*/]
+[query public getDatabasesType(aProgram: Program, expectedType: String) : Set(Definition) =  
+aProgram.definitions
+	->select(definition:Definition | definition.type.equalsIgnoreCase(expectedType)) /]
+
+[**
+ * 
+*/]
+[query public getConnections(aProgram: Program) : Set(Connection) = aProgram.connections /]
+
+[**
+ * 
+*/]
+[query public getConnection(connections : Set(Connection), databaseName : String) : Connection = 
+connections->select(connection:Connection | 
+	connection.name.equalsIgnoreCase(databaseName))->asSequence()->first() /]
+
+[**
+ * 
+*/]
+[query public existsInSet(elementName : String, definitions : Set(Definition)) : Boolean = 
+	definitions->exists(definition:Definition | definition.name.equalsIgnoreCase(elementName)) /]
+
+[**
+ * 
+*/]
+[query public getAssociatedAttributes(relationName : String, attributes : Sequence(String)) : Sequence(String) =  
+	attributes->select(attribute : String | attribute.startsWith(relationName + '.'))/]

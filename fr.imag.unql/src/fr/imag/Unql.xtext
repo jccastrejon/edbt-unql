@@ -1,0 +1,21 @@
+grammar fr.imag.Unql with org.eclipse.xtext.common.Terminals
+
+generate unql "http://www.imag.fr/Unql"
+
+Program:
+	'[Definitions]'
+	definitions+=Definition*
+	'[Connections]'
+	connections+=Connection*
+	'[Queries]'
+	queries+=Select*;
+
+Definition:
+	'define' name=STRING 'as' type=('graph' | 'document');
+
+Connection:
+	'connect' name=STRING 'url' url=STRING ('username' username=STRING 'password' password=STRING)?;
+
+Select:
+	'select' attributes+=STRING* 'from' relations+=STRING* ('where' conditions+=STRING*)?;
+	

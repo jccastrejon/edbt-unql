@@ -1,0 +1,42 @@
+[comment encoding = UTF-8 /]
+[module QueryTemplate('http://www.imag.fr/Unql')]
+[import fr::imag::unql::transformation::util::UtilTemplate /]
+[import fr::imag::unql::transformation::util::DatabaseTemplate /]
+
+[**
+ * 
+*/]
+[template public generateQuery(aProgram : Program)]
+[comment @main/]
+[file ('result.txt', false, 'UTF-8')]
+[let graphDatabases : Set(Definition) = aProgram.getDatabasesType('graph')]
+[let documentDatabases : Set(Definition) = aProgram.getDatabasesType('document')]
+[let connections : Set(Connection) = aProgram.getConnections()]
+
+[comment Execute each of the defined queries... /]
+[for (aQuery : Select | aProgram.queries)]
+
+	-----------------
+	Evaluating query: [aQuery/]
+
+	[comment Analysis is performed to each relation and their associated attributes /]
+	[for (relation : String | aQuery.relations)]
+		[comment Recover the attributes associated to the current relation /]
+		[let attributes : Sequence(String) = relation.getAssociatedAttributes(aQuery.attributes)]
+		[comment Query graph database /]
+		[if (relation.existsInSet(graphDatabases))]
+			[relation.executeGraphQuery(attributes)/]
+		[comment Query document database /]	
+		[elseif (relation.existsInSet(documentDatabases))]
+			[relation.executeDocumentQuery(attributes)/]
+		[/if]
+		[/let]
+	[/for]
+	-----------------
+
+[/for]
+[/let]
+[/let]
+[/let]
+[/file]
+[/template]

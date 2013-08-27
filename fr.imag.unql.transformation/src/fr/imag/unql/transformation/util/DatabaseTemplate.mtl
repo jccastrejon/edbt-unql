@@ -1,15 +1,14 @@
 [comment encoding = UTF-8 /]
 [module DatabaseTemplate('http://www.imag.fr/Unql')]
 
-
 [**
  * 
 */]
 [query public executeGraphQuery(relationName : String, attributes : Sequence(String)) : String = 
-	'TODO: Actual invocation...'  /]
+	invoke('fr.imag.unql.transformation.util.Neo4jUtil', 'executeQuery(java.lang.String, java.util.List)', Sequence{relationName, attributes}) /]
 
 [**
  * 
 */]
 [query public executeDocumentQuery(relationName : String, attributes : Sequence(String)) : String = 
-	'TODO: Actual invocation...'  /]
+	invoke('fr.imag.unql.transformation.util.MongoDBUtil', 'executeQuery(java.lang.String, java.util.List)', Sequence{relationName, attributes}) /]

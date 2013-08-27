@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project default="QueryTemplate" name="fr.imag.unql.transformation">
-    <property name="ECLIPSE_HOME" value="../../../eclipse-juno"/>
-    <property name="ECLIPSE_WORKSPACE" value="../.."/>
+    <property name="ECLIPSE_HOME" value="../../../../java/eclipse-juno"/>
+    <property name="ECLIPSE_WORKSPACE" value="../../../../java/workspace_edbt"/>
 
     <!-- The classpath with only the dependencies used by the project -->
     <path id="fr.imag.unql.transformation.libraryclasspath">

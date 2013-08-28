@@ -21,9 +21,11 @@ public class Neo4jUtil {
 	 * 
 	 * @param relationName
 	 * @param attributes
+	 * @param conditions
 	 * @return
 	 */
-	public String executeQuery(String relationName, List<String> attributes) {
+	public String executeQuery(final String relationName,
+			final List<String> attributes, final List<String> conditions) {
 		RestAPI graphDb;
 		StringBuilder returnValue;
 		Map<String, Object> resultRow;
@@ -31,14 +33,19 @@ public class Neo4jUtil {
 		QueryEngine<Map<String, Object>> engine;
 		Iterator<Map<String, Object>> resultIterator;
 
+		// TODO: Get connection data as argument
 		returnValue = new StringBuilder();
 		graphDb = new RestAPIFacade("http://localhost:7474/db/data");
 		engine = new RestCypherQueryEngine(graphDb);
 
+		// Build and execute Cypher query
 		result = engine.query(
-				"start n=node(*) return "
-						+ this.getAttributesList("n", attributes),
+				"start " + relationName + "=node(*)"
+						+ this.getConditionsList(conditions) + "return "
+						+ this.getAttributesList(attributes),
 				Collections.EMPTY_MAP);
+
+		// Analyze query results
 		resultIterator = result.iterator();
 		if (resultIterator != null) {
 			while (resultIterator.hasNext()) {
@@ -52,12 +59,10 @@ public class Neo4jUtil {
 
 	/**
 	 * 
-	 * @param nodeName
 	 * @param attributes
 	 * @return
 	 */
-	private String getAttributesList(final String nodeName,
-			final List<String> attributes) {
+	private String getAttributesList(final List<String> attributes) {
 		String returnValue;
 		StringBuilder attributesList;
 
@@ -65,13 +70,44 @@ public class Neo4jUtil {
 		// can be optional
 		attributesList = new StringBuilder();
 		for (String attribute : attributes) {
-			attributesList.append(nodeName).append(".").append(attribute)
-					.append("? as ").append(attribute).append(",");
+			attributesList.append(attribute).append("? as ")
+					.append(attribute.substring(attribute.indexOf('.') + 1))
+					.append(",");
 		}
 
 		// Remove last comma
 		returnValue = attributesList.toString().substring(0,
-				attributesList.toString().length() - 1);
+				attributesList.toString().lastIndexOf(","));
+
+		return returnValue;
+	}
+
+	/**
+	 * TODO: Refactor with getAttributesList()
+	 * 
+	 * @param conditions
+	 * @return
+	 */
+	private String getConditionsList(final List<String> conditions) {
+		String returnValue;
+		StringBuilder conditionsList;
+
+		if ((conditions != null) && (!conditions.isEmpty())) {
+			// Join all attributes in a single String, specifying that all of
+			// them
+			// can be optional
+			conditionsList = new StringBuilder();
+			for (String condition : conditions) {
+				conditionsList.append(condition.replace("=", "?=")).append(
+						" and ");
+			}
+
+			returnValue = " where "
+					+ conditionsList.toString().substring(0,
+							conditionsList.toString().lastIndexOf(" and "));
+		} else {
+			returnValue = "";
+		}
 
 		return returnValue;
 	}

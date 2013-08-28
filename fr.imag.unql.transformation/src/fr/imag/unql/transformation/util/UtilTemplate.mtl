@@ -29,6 +29,5 @@ connections->select(connection:Connection |
 [**
  * 
 */]
-[query public getAssociatedAttributes(relationName : String, attributes : Sequence(String)) : Sequence(String) =  
-	attributes->select(attribute : String | attribute.startsWith(relationName + '.'))
-		->collect(attribute : String | attribute.substring(attribute.index('.')+1, attribute.size()))/]
+[query public getAssociatedElements(relationName : String, attributes : Sequence(String)) : Sequence(String) =  
+	attributes->select(attribute : String | attribute.startsWith(relationName + '.'))/]

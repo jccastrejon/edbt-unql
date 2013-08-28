@@ -4,8 +4,8 @@
 [**
  * 
 */]
-[query public executeGraphQuery(relationName : String, attributes : Sequence(String)) : String = 
-	invoke('fr.imag.unql.transformation.util.Neo4jUtil', 'executeQuery(java.lang.String, java.util.List)', Sequence{relationName, attributes}) /]
+[query public executeGraphQuery(relationName : String, attributes : Sequence(String), conditions : Sequence(String)) : String = 
+	invoke('fr.imag.unql.transformation.util.Neo4jUtil', 'executeQuery(java.lang.String, java.util.List, java.util.List)', Sequence{relationName, attributes, conditions}) /]
 
 [**
  * 

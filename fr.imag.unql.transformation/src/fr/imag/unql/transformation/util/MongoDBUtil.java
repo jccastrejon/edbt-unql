@@ -47,11 +47,11 @@ public class MongoDBUtil implements DatabaseUtil {
 		StringBuilder returnValue;
 		BasicDBObject searchQuery;
 		BasicDBObject searchAttributes;
-		
+
 		returnValue = new StringBuilder();
 		Map<String, String> conditionsMap;
 		Map<String, String> attributesMap;
-		
+
 		try {
 			searchQuery = new BasicDBObject();
 			searchAttributes = new BasicDBObject();
@@ -80,7 +80,7 @@ public class MongoDBUtil implements DatabaseUtil {
 			collection = database.getCollection(relationName);
 			queryResults = collection.find(searchQuery, searchAttributes);
 			while (queryResults.hasNext()) {
-				returnValue.append(queryResults.next());
+				returnValue.append(queryResults.next()).append("\n");
 			}
 		} catch (Exception e) {
 			returnValue.append("Error while executing MongoDB query: "

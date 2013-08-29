@@ -17,7 +17,7 @@
 [for (aQuery : Select | aProgram.queries)]
 
   -----------------
-  Evaluating query for relations: [aQuery.relations/], with attributes: [aQuery.attributes/], with conditions: [aQuery.conditions/]
+  Evaluating query: [aQuery/]
 
   [comment Analysis is performed to each relation and their associated attributes /]
   [for (relation : String | aQuery.relations)]

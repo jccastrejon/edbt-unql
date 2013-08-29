@@ -41,6 +41,7 @@ public class Neo4jUtil implements DatabaseUtil {
 			final String connectionPassword, final List<String> attributes,
 			final List<String> conditions) {
 		RestAPI graphDb;
+		boolean addResult;
 		StringBuilder returnValue;
 		Map<String, Object> resultRow;
 		QueryResult<Map<String, Object>> result;
@@ -71,7 +72,18 @@ public class Neo4jUtil implements DatabaseUtil {
 			if (resultIterator != null) {
 				while (resultIterator.hasNext()) {
 					resultRow = resultIterator.next();
-					returnValue.append(resultRow.toString());
+					// Only add non-empty results
+					addResult = false;
+					for (Object value : resultRow.values()) {
+						if (value != null) {
+							addResult = true;
+							break;
+						}
+					}
+
+					if (addResult) {
+						returnValue.append(resultRow.toString()).append("\n");
+					}
 				}
 			}
 		} catch (Exception e) {

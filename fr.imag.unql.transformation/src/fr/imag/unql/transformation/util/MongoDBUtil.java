@@ -1,3 +1,20 @@
+/**
+ * Copyright 2013 jccastrejon
+ * 
+ * This file is part of EDBT-unql.
+ * EDBT-unql is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * any later version.
+ * 
+ * EDBT-unql is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ * 
+ * You should have received a copy of the GNU General Public License
+ * along with EDBT-unql.  If not, see <http://www.gnu.org/licenses/>.
+ */
 package fr.imag.unql.transformation.util;
 
 import java.util.HashMap;
@@ -11,18 +28,14 @@ import com.mongodb.DBCursor;
 import com.mongodb.MongoClient;
 
 /**
+ * Allows the execution of queries in MongoDB databases.
  * 
  * @author jccastrejon
  * 
  */
-public class MongoDBUtil {
-	/**
-	 * 
-	 * @param relationName
-	 * @param attributes
-	 * @param conditions
-	 * @return
-	 */
+public class MongoDBUtil implements DatabaseUtil {
+
+	@Override
 	public String executeQuery(final String relationName,
 			final String connectionURL, final String connectionUsername,
 			final String connectionPassword, final List<String> attributes,
@@ -34,33 +47,37 @@ public class MongoDBUtil {
 		StringBuilder returnValue;
 		BasicDBObject searchQuery;
 		BasicDBObject searchAttributes;
+		
 		returnValue = new StringBuilder();
 		Map<String, String> conditionsMap;
 		Map<String, String> attributesMap;
-
+		
 		try {
 			searchQuery = new BasicDBObject();
 			searchAttributes = new BasicDBObject();
 			mongoClient = new MongoClient(connectionURL);
 			database = mongoClient.getDB(relationName);
 
+			// Database connection
 			if ((connectionUsername != null) && (connectionPassword != null)) {
 				database.authenticate(connectionUsername,
 						connectionPassword.toCharArray());
 			}
 
-			collection = database.getCollection(relationName);
-
+			// Format attributes that will be projected
 			attributesMap = this.getAttributesMap(relationName, attributes);
 			for (String key : attributesMap.keySet()) {
 				searchAttributes.put(key, attributesMap.get(key));
 			}
 
+			// Format conditions that will be applied
 			conditionsMap = this.getConditionsMap(relationName, conditions);
 			for (String key : conditionsMap.keySet()) {
 				searchQuery.put(key, conditionsMap.get(key));
 			}
 
+			// Execute query and retrieve results
+			collection = database.getCollection(relationName);
 			queryResults = collection.find(searchQuery, searchAttributes);
 			while (queryResults.hasNext()) {
 				returnValue.append(queryResults.next());
@@ -69,11 +86,14 @@ public class MongoDBUtil {
 			returnValue.append("Error while executing MongoDB query: "
 					+ e.getMessage());
 		}
+
 		return returnValue.toString();
 	}
 
 	/**
+	 * Format attributes that will be projected.
 	 * 
+	 * @param relationName
 	 * @param attributes
 	 * @return
 	 */
@@ -92,7 +112,10 @@ public class MongoDBUtil {
 	}
 
 	/**
+	 * Format conditions that will be applied. - TODO: Refactor with
+	 * getAttributesMap()
 	 * 
+	 * @param relationName
 	 * @param conditions
 	 * @return
 	 */

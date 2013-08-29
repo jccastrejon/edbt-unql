@@ -42,7 +42,7 @@ public class QueryTemplate extends AbstractAcceleoGenerator {
      *
      * @generated
      */
-    public static final String[] TEMPLATE_NAMES = { "generateQuery" };
+    public static final String[] TEMPLATE_NAMES = { "executeProgram" };
     
     /**
      * The list of properties files from the launch parameters (Launch configuration).

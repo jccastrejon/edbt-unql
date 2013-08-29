@@ -1,3 +1,20 @@
+/**
+ * Copyright 2013 jccastrejon
+ * 
+ * This file is part of EDBT-unql.
+ * EDBT-unql is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * any later version.
+ * 
+ * EDBT-unql is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ * 
+ * You should have received a copy of the GNU General Public License
+ * along with EDBT-unql.  If not, see <http://www.gnu.org/licenses/>.
+ */
 package fr.imag.unql.transformation.util;
 
 import java.util.Collections;
@@ -16,14 +33,9 @@ import org.neo4j.rest.graphdb.util.QueryResult;
  * @author jccastrejon
  * 
  */
-public class Neo4jUtil {
-	/**
-	 * 
-	 * @param relationName
-	 * @param attributes
-	 * @param conditions
-	 * @return
-	 */
+public class Neo4jUtil implements DatabaseUtil {
+
+	@Override
 	public String executeQuery(final String relationName,
 			final String connectionURL, final String connectionUsername,
 			final String connectionPassword, final List<String> attributes,
@@ -35,37 +47,43 @@ public class Neo4jUtil {
 		QueryEngine<Map<String, Object>> engine;
 		Iterator<Map<String, Object>> resultIterator;
 
-		// TODO: Get connection data as argument
 		returnValue = new StringBuilder();
 
-		if ((connectionUsername != null) && (connectionPassword != null)) {
-			graphDb = new RestAPIFacade(connectionURL, connectionUsername,
-					connectionPassword);
-		} else {
-			graphDb = new RestAPIFacade(connectionURL);
-		}
-
-		// Build and execute Cypher query
-		engine = new RestCypherQueryEngine(graphDb);
-		result = engine.query(
-				"start " + relationName + "=node(*)"
-						+ this.getConditionsList(conditions) + "return "
-						+ this.getAttributesList(attributes),
-				Collections.EMPTY_MAP);
-
-		// Analyze query results
-		resultIterator = result.iterator();
-		if (resultIterator != null) {
-			while (resultIterator.hasNext()) {
-				resultRow = resultIterator.next();
-				returnValue.append(resultRow.toString());
+		try {
+			// Database connection
+			if ((connectionUsername != null) && (connectionPassword != null)) {
+				graphDb = new RestAPIFacade(connectionURL, connectionUsername,
+						connectionPassword);
+			} else {
+				graphDb = new RestAPIFacade(connectionURL);
 			}
+
+			// Build and execute Cypher query
+			engine = new RestCypherQueryEngine(graphDb);
+			result = engine.query(
+					"start " + relationName + "=node(*)"
+							+ this.getConditionsList(conditions) + "return "
+							+ this.getAttributesList(attributes),
+					Collections.EMPTY_MAP);
+
+			// Analyze query results
+			resultIterator = result.iterator();
+			if (resultIterator != null) {
+				while (resultIterator.hasNext()) {
+					resultRow = resultIterator.next();
+					returnValue.append(resultRow.toString());
+				}
+			}
+		} catch (Exception e) {
+			returnValue.append("Error while executing Cypher query: "
+					+ e.getMessage());
 		}
 
 		return returnValue.toString();
 	}
 
 	/**
+	 * Format attributes that will be projected.
 	 * 
 	 * @param attributes
 	 * @return
@@ -91,7 +109,8 @@ public class Neo4jUtil {
 	}
 
 	/**
-	 * TODO: Refactor with getAttributesList()
+	 * Format conditions that will be applied. - TODO: Refactor with
+	 * getAttributesList()
 	 * 
 	 * @param conditions
 	 * @return

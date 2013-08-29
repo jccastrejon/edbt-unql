@@ -7,7 +7,7 @@
             objectClass="org.eclipse.core.resources.IFile"
             nameFilter="*.unql"
             id="fr.imag.unql.transformation.ui.popupMenus.contribution.IFile">
-         <menu id="org.eclipse.acceleo.module.menu" label="Acceleo Model to Text" path="additionsAcceleo">
+         <menu id="org.eclipse.acceleo.module.menu" label="EDBT-unql" path="additionsAcceleo">
                <groupMarker name="acceleo"/> 
          </menu>
          <action
@@ -15,7 +15,7 @@
                enablesFor="+"
                id="fr.imag.unql.transformation.ui.popupMenus.acceleoGenerateTransformationAction"
                icon="icons/default.gif"
-               label="Generate Transformation"
+               label="Execute queries"
                menubarPath="org.eclipse.acceleo.module.menu/acceleo"/>
       </objectContribution>
    </extension>

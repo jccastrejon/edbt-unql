@@ -1,0 +1,3 @@
+If src is empty, Git doesn't allow commit.
+This is a dummy file just to avoid Eclipse building errors 
+when checking out the project

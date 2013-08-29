@@ -65,5 +65,6 @@
 	<classpathentry kind="lib" path="lib/servlet-api-2.5-20081211.jar"/>
 	<classpathentry kind="lib" path="lib/slf4j-api-1.6.2.jar"/>
 	<classpathentry kind="lib" path="lib/stax-api-1.0.1.jar"/>
+	<classpathentry kind="lib" path="lib/mongo-java-driver-2.11.2.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

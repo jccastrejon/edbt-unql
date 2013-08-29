@@ -1,7 +1,6 @@
 [comment encoding = UTF-8 /]
 [module QueryTemplate('http://www.imag.fr/Unql')]
 [import fr::imag::unql::transformation::util::UtilTemplate /]
-[import fr::imag::unql::transformation::util::DatabaseTemplate /]
 
 [**
  * 
@@ -29,7 +28,7 @@
 			[relation.executeGraphQuery(attributes, conditions)/]
 		[comment Query document database /]	
 		[elseif (relation.existsInSet(documentDatabases))]
-			[relation.executeDocumentQuery(attributes)/]
+			[relation.executeDocumentQuery(attributes, conditions)/]
 		[/if]
 		[/let]
 		[/let]

@@ -4,6 +4,18 @@
 [**
  * 
 */]
+[query public executeGraphQuery(relationName : String, attributes : Sequence(String), conditions : Sequence(String)) : String = 
+	invoke('fr.imag.unql.transformation.util.Neo4jUtil', 'executeQuery(java.lang.String, java.util.List, java.util.List)', Sequence{relationName, attributes, conditions}) /]
+
+[**
+ * 
+*/]
+[query public executeDocumentQuery(relationName : String, attributes : Sequence(String), conditions : Sequence(String)) : String = 
+	invoke('fr.imag.unql.transformation.util.MongoDBUtil', 'executeQuery(java.lang.String, java.util.List, java.util.List)', Sequence{relationName, attributes, conditions}) /]
+
+[**
+ * 
+*/]
 [query public getDatabasesType(aProgram: Program, expectedType: String) : Set(Definition) =  
 aProgram.definitions
 	->select(definition:Definition | definition.type.equalsIgnoreCase(expectedType)) /]

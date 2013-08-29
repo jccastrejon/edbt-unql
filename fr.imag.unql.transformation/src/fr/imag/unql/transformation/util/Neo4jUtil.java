@@ -25,7 +25,9 @@ public class Neo4jUtil {
 	 * @return
 	 */
 	public String executeQuery(final String relationName,
-			final List<String> attributes, final List<String> conditions) {
+			final String connectionURL, final String connectionUsername,
+			final String connectionPassword, final List<String> attributes,
+			final List<String> conditions) {
 		RestAPI graphDb;
 		StringBuilder returnValue;
 		Map<String, Object> resultRow;
@@ -35,10 +37,16 @@ public class Neo4jUtil {
 
 		// TODO: Get connection data as argument
 		returnValue = new StringBuilder();
-		graphDb = new RestAPIFacade("http://localhost:7474/db/data");
-		engine = new RestCypherQueryEngine(graphDb);
+
+		if ((connectionUsername != null) && (connectionPassword != null)) {
+			graphDb = new RestAPIFacade(connectionURL, connectionUsername,
+					connectionPassword);
+		} else {
+			graphDb = new RestAPIFacade(connectionURL);
+		}
 
 		// Build and execute Cypher query
+		engine = new RestCypherQueryEngine(graphDb);
 		result = engine.query(
 				"start " + relationName + "=node(*)"
 						+ this.getConditionsList(conditions) + "return "
@@ -94,8 +102,7 @@ public class Neo4jUtil {
 
 		if ((conditions != null) && (!conditions.isEmpty())) {
 			// Join all attributes in a single String, specifying that all of
-			// them
-			// can be optional
+			// them can be optional
 			conditionsList = new StringBuilder();
 			for (String condition : conditions) {
 				conditionsList.append(condition.replace("=", "?=")).append(

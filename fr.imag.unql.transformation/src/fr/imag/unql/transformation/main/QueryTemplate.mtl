@@ -15,8 +15,8 @@
 [comment Execute each of the defined queries... /]
 [for (aQuery : Select | aProgram.queries)]
 
-	-----------------
-	Evaluating query: [aQuery/]
+-----------------
+Evaluating query for relations: [aQuery.relations/], with attributes: [aQuery.attributes/], with conditions: [aQuery.conditions/]
 
 	[comment Analysis is performed to each relation and their associated attributes /]
 	[for (relation : String | aQuery.relations)]
@@ -25,15 +25,15 @@
 		[let conditions : Sequence(String) = relation.getAssociatedElements(aQuery.conditions)]
 		[comment Query graph database /]
 		[if (relation.existsInSet(graphDatabases))]
-			[relation.executeGraphQuery(attributes, conditions)/]
+			[relation.executeGraphQuery(relation.getConnection(connections), attributes, conditions)/]
 		[comment Query document database /]	
 		[elseif (relation.existsInSet(documentDatabases))]
-			[relation.executeDocumentQuery(attributes, conditions)/]
+			[relation.executeDocumentQuery(relation.getConnection(connections), attributes, conditions)/]
 		[/if]
 		[/let]
 		[/let]
 	[/for]
-	-----------------
+-----------------
 
 [/for]
 [/let]

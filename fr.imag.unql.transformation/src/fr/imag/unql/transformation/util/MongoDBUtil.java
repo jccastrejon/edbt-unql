@@ -24,7 +24,9 @@ public class MongoDBUtil {
 	 * @return
 	 */
 	public String executeQuery(final String relationName,
-			final List<String> attributes, final List<String> conditions) {
+			final String connectionURL, final String connectionUsername,
+			final String connectionPassword, final List<String> attributes,
+			final List<String> conditions) {
 		DB database;
 		DBCursor queryResults;
 		DBCollection collection;
@@ -39,8 +41,14 @@ public class MongoDBUtil {
 		try {
 			searchQuery = new BasicDBObject();
 			searchAttributes = new BasicDBObject();
-			mongoClient = new MongoClient("localhost");
+			mongoClient = new MongoClient(connectionURL);
 			database = mongoClient.getDB(relationName);
+
+			if ((connectionUsername != null) && (connectionPassword != null)) {
+				database.authenticate(connectionUsername,
+						connectionPassword.toCharArray());
+			}
+
 			collection = database.getCollection(relationName);
 
 			attributesMap = this.getAttributesMap(relationName, attributes);

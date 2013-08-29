@@ -4,14 +4,14 @@
 [**
  * 
 */]
-[query public executeGraphQuery(relationName : String, attributes : Sequence(String), conditions : Sequence(String)) : String = 
-	invoke('fr.imag.unql.transformation.util.Neo4jUtil', 'executeQuery(java.lang.String, java.util.List, java.util.List)', Sequence{relationName, attributes, conditions}) /]
+[query public executeGraphQuery(relationName : String, connection : Connection, attributes : Sequence(String), conditions : Sequence(String)) : String = 
+	invoke('fr.imag.unql.transformation.util.Neo4jUtil', 'executeQuery(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.util.List, java.util.List)', Sequence{relationName, connection.url, connection.name, connection.password, attributes, conditions}) /]
 
 [**
  * 
 */]
-[query public executeDocumentQuery(relationName : String, attributes : Sequence(String), conditions : Sequence(String)) : String = 
-	invoke('fr.imag.unql.transformation.util.MongoDBUtil', 'executeQuery(java.lang.String, java.util.List, java.util.List)', Sequence{relationName, attributes, conditions}) /]
+[query public executeDocumentQuery(relationName : String, connection : Connection, attributes : Sequence(String), conditions : Sequence(String)) : String = 
+	invoke('fr.imag.unql.transformation.util.MongoDBUtil', 'executeQuery(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.util.List, java.util.List)', Sequence{relationName, connection.url, connection.name, connection.password, attributes, conditions}) /]
 
 [**
  * 
@@ -28,7 +28,7 @@ aProgram.definitions
 [**
  * 
 */]
-[query public getConnection(connections : Set(Connection), databaseName : String) : Connection = 
+[query public getConnection(databaseName : String, connections : Set(Connection)) : Connection = 
 connections->select(connection:Connection | 
 	connection.name.equalsIgnoreCase(databaseName))->asSequence()->first() /]
 

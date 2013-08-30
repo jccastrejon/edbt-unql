@@ -1,4 +1,5 @@
 [comment encoding = UTF-8 /]
+[** Copyright 2013 jccastrejon */]
 [module QueryTemplate('http://www.imag.fr/Unql')]
 [import fr::imag::unql::transformation::util::UtilTemplate /]
 

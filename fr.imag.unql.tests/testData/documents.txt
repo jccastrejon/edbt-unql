@@ -1,0 +1,16 @@
+conn = new Mongo();
+db = conn.getDB("blogEntries");
+
+db.blogEntries.insert({
+	"date": "2013-08-29",
+	"author": "jccastrejon",
+	"content": "A computer hacker learns from mysterious rebels about the true nature of his reality and his role in the war against its controllers",
+	"movie": "The Matrix"
+})
+
+db.blogEntries.insert({
+	"date": "2013-08-30",
+	"author": "jccastrejon",
+	"content": "The human city of Zion defends itself against the massive invasion of the machines as Neo fights to end the war at another front while also opposing the rogue Agent Smith.",
+	"movie": "The Matrix Revolutions"
+})

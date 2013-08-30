@@ -1,0 +1,12 @@
+[Definitions]
+define "movies" as graph 
+define "blogEntries" as document
+
+[Connections] 
+connect "movies" url "http://127.0.0.1:7474/db/data"
+connect "blogEntries" url "127.0.0.1"
+
+[Queries] 
+select "movies.id" "movies.year" from "movies"
+select 'movies.year' from 'movies' where "movies.title='The Matrix'"
+select "blogEntries.date" "blogEntries.content" from "blogEntries" where "blogEntries.author='jccastrejon'"

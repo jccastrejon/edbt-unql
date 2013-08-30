@@ -7,6 +7,7 @@ of simple queries of the style "select - from - where" over Neo4j and MongoDB da
 
 Configure Eclipse
 ----------------------
+        - Make sure you have Java JDK 6 installed
 	- Download and extract Eclipse Modeling Tools: http://www.eclipse.org/downloads/packages/eclipse-modeling-tools/keplerr
 	- Install Acceleo:
 		- Add the following update site: (Help->Install New Software->Add..)

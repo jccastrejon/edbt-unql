@@ -82,8 +82,16 @@ Modify db interaction
 	- Update Java files:
 		- /fr.imag.unql.transformation/src/fr/imag/unql/transformation/util/MongoDBUtil.java
 		- /fr.imag.unql.transformation/src/fr/imag/unql/transformation/util/Neo4jUtil.java
-		
+
 Notes
 ----------------------
 	- Neo4j node auto indexing is enabled. The list of attributes to be indexed can be modified in the neo4j.properties
 	- MongoDB queries assume the same name for database and collection
+
+Useful links
+----------------------
+1. Xtext: http://www.eclipse.org/Xtext/documentation.html
+2. Acceleo: http://www.obeonetwork.com/group/acceleo/page/acceleo-3-1-0-user-guide, http://help.eclipse.org/indigo/index.jsp?topic=%2Forg.eclipse.acceleo.doc%2Fdoc%2Fhtml%2Focl_operation_reference.html
+3. Cypher: http://docs.neo4j.org/chunked/milestone/cypher-query-lang.html, http://www.neo4j.org/learn/cypher
+4. MongoDB: http://docs.mongodb.org/manual/tutorial/query-documents/
+

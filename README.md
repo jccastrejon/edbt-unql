@@ -5,6 +5,23 @@ This is a sample project for the Unified query language (unql) challenge present
 the EDBT summer school 2013 (http://edbt-school-2013.imag.fr/). It implements the execution 
 of simple queries of the style "select - from - where" over Neo4j and MongoDB data stores. 
 
+Sample unql Program
+----------------------
+
+	[Definitions]
+	define "movies" as graph 
+	define "blogEntries" as document
+
+	[Connections] 
+	connect "movies" url "http://127.0.0.1:7474/db/data"
+	connect "blogEntries" url "127.0.0.1"
+
+	[Queries] 
+	select "movies.id" "movies.year" from "movies"
+	select 'movies.year' from 'movies' where "movies.title='The Matrix'"
+	select "blogEntries.date" "blogEntries.content" from "blogEntries" where "blogEntries.author='jccastrejon'"
+
+
 Configure Eclipse
 ----------------------
 	- Make sure you have Java JDK 6 installed

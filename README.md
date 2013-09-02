@@ -5,6 +5,11 @@ This is a sample project for the Unified query language (unql) challenge present
 the EDBT summer school 2013 (http://edbt-school-2013.imag.fr/). It implements the execution 
 of simple queries of the style "select - from - where" over Neo4j and MongoDB data stores. 
 
+The main idea of this challenge is to extend the basic language with new operators (JOIN, UNION, TRAVERSE, etc.).
+You have to decide whether these operators apply both to document and graph data stores, how to express queries
+that require data from both data stores, how scalable your solutions, etc.
+
+
 Sample unql Program
 ----------------------
 

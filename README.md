@@ -3,7 +3,8 @@ EDBT - Unified query language challenge
 
 This is a sample project for the Unified query language (unql) challenge presented during 
 the EDBT summer school 2013 (http://edbt-school-2013.imag.fr/). It implements the execution 
-of simple queries of the style "select - from - where" over Neo4j and MongoDB data stores. 
+of simple queries of the style "select - from - where" over Neo4j and MongoDB data stores.
+The language is loosely based on the UnQL project (http://unql.sqlite.org/index.html/wiki?name=UnQL). 
 
 The main idea of this challenge is to extend the basic language with new operators (JOIN, UNION, TRAVERSE, etc.).
 You have to decide whether these operators apply both to document and graph data stores, how to express queries

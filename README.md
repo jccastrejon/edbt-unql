@@ -8,7 +8,7 @@ The language is loosely based on the UnQL project (http://unql.sqlite.org/index.
 
 The main idea of this challenge is to extend the basic language with new operators (JOIN, UNION, TRAVERSE, etc.).
 You have to decide whether these operators apply both to document and graph data stores, how to express queries
-that require data from both data stores, how scalable your solutions, etc.
+that require data from both data stores, how scalable your solution is, etc.
 
 
 Sample unql Program

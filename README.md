@@ -96,8 +96,15 @@ Notes
 
 Useful links
 ----------------------
-1. Xtext: http://www.eclipse.org/Xtext/documentation.html
-2. Acceleo: http://www.obeonetwork.com/group/acceleo/page/acceleo-3-1-0-user-guide, http://help.eclipse.org/indigo/index.jsp?topic=%2Forg.eclipse.acceleo.doc%2Fdoc%2Fhtml%2Focl_operation_reference.html
-3. Cypher: http://docs.neo4j.org/chunked/milestone/cypher-query-lang.html, http://www.neo4j.org/learn/cypher
-4. MongoDB: http://docs.mongodb.org/manual/tutorial/query-documents/
+1. Xtext: 
+	* http://www.eclipse.org/Xtext/documentation.html
+2. Acceleo: 
+	* http://www.eclipse.org/acceleo/
+	* http://www.obeonetwork.com/group/acceleo/page/acceleo-3-1-0-user-guide
+	* http://help.eclipse.org/indigo/index.jsp?topic=%2Forg.eclipse.acceleo.doc%2Fdoc%2Fhtml%2Focl_operation_reference.html
+3. Cypher: 
+	* http://docs.neo4j.org/chunked/milestone/cypher-query-lang.html
+	* http://www.neo4j.org/learn/cypher
+4. MongoDB: 
+	* http://docs.mongodb.org/manual/tutorial/query-documents/
 

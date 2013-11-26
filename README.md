@@ -27,6 +27,11 @@ Sample unql Program
 	select 'movies.year' from 'movies' where "movies.title='The Matrix'"
 	select "blogEntries.date" "blogEntries.content" from "blogEntries" where "blogEntries.author='jccastrejon'"
 
+Virtual machine with already configured environment
+----------------------
+	- Install VirtualBox: https://www.virtualbox.org/wiki/Downloads
+	- Download VM image: https://docs.google.com/uc?id=0B2SdlgBOyP0aX3ZLWlo2cjZqMkE&export=download
+	- Open VirtualBox and import image (File->Import Appliance)
 
 Configure Eclipse
 ----------------------

@@ -11,7 +11,7 @@ You have to decide whether these operators apply both to document and graph data
 that require data from both data stores, how scalable your solution is, etc.
 
 
-Sample unql Program
+1. Sample unql Program
 ----------------------
 
 	[Definitions]
@@ -27,14 +27,20 @@ Sample unql Program
 	select 'movies.year' from 'movies' where "movies.title='The Matrix'"
 	select "blogEntries.date" "blogEntries.content" from "blogEntries" where "blogEntries.author='jccastrejon'"
 
-Virtual machine with already configured environment
-----------------------
+2. Sample language extension 
+---------------------
+	- Visit: https://drive.google.com/file/d/0B2SdlgBOyP0aaG1naWRUVjR2cDQ/edit?usp=sharing
+
+## 3. Environment configuration ##
+
+### 3.1 Virtual machine with already configured environment ###
 	- Install VirtualBox: https://www.virtualbox.org/wiki/Downloads
 	- Download VM image: https://docs.google.com/uc?id=0B2SdlgBOyP0aX3ZLWlo2cjZqMkE&export=download
 	- Open VirtualBox and import image (File->Import Appliance)
 
-Configure Eclipse
-----------------------
+### 3.2 Manual Configuration ###
+
+#### 3.2.1 Configure Eclipse ####
 	- Make sure you have Java JDK 6 installed
 	- Download and extract Eclipse Modeling Tools: http://www.eclipse.org/downloads/packages/eclipse-modeling-tools/keplerr
 	- Install Acceleo:
@@ -47,8 +53,7 @@ Configure Eclipse
 	- Restart Eclipse
 	- Import projects from Git repository
 
-Configure databases
-----------------------
+#### 3.2.2 Configure databases ####
 	- First time:
 		- MongoDB:
 			- Download and extract MongoDB 2.4.6: http://www.mongodb.org/downloads
@@ -66,8 +71,7 @@ Configure databases
 		- Start MongoDB server: <MONGO_HOME>/bin/.mongod
 		- Start Neo4j server: <NEO4J_HOME>/bin/neo4j start
 
-Execute queries
-----------------------
+## 4. Language execution 
 	- Make sure the databases are running
 	- Select the /fr.imag.unql.transformation.ui/plugin.xml file with right click and choose: Run As->Eclipse Application
 	- Create a New Java Project (Right click->New->Java Project)
@@ -76,24 +80,24 @@ Execute queries
 	- Check the results in the <PROJECT>/src-gen/result.txt file
 	- To check errors in the execution open the Error Log (Window->Show View->Error Log)
 
-Modify the language
-----------------------
+## 5. Language modification ##
+
+### 5.1 Modify the grammar ###
 	- Update the grammar file: /fr.imag.unql/src/fr/imag/Unql.xtext
 	- Select the grammar file with right click and choose: Run As->Generate Xtext artifacts 
 	- Rebuild projects (Project->Clean...->Clean all projects)
 
-Modify query analysis
-----------------------
+### 5.2 Modify query analysis ###
 	- Update Acceleo transformation files:
 		- /fr.imag.unql.transformation/src/fr/imag/unql/transformation/QueryTemplate.mtl
 		- /fr.imag.unql.transformation/src/fr/imag/unql/transformation/util/UtilTemplate.mtl
 
-Modify db interaction
-----------------------
+### 5.3 Modify db interaction ###
 	- Update Java files:
 		- /fr.imag.unql.transformation/src/fr/imag/unql/transformation/util/MongoDBUtil.java
 		- /fr.imag.unql.transformation/src/fr/imag/unql/transformation/util/Neo4jUtil.java
 
+***
 Notes
 ----------------------
 	- Neo4j node auto indexing is enabled. The list of attributes to be indexed can be modified in the neo4j.properties

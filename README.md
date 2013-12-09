@@ -27,9 +27,9 @@ that require data from both data stores, how scalable your solution is, etc.
 	select 'movies.year' from 'movies' where "movies.title='The Matrix'"
 	select "blogEntries.date" "blogEntries.content" from "blogEntries" where "blogEntries.author='jccastrejon'"
 
-2. Sample language extension 
+2. Guide to language extension 
 ---------------------
-	- Visit: https://drive.google.com/file/d/0B2SdlgBOyP0aaG1naWRUVjR2cDQ/edit?usp=sharing
+	- Visit: https://drive.google.com/file/d/0B2SdlgBOyP0aZE5PWFNGR1BpaWM/edit?usp=sharing
 
 ## 3. Environment configuration ##
 

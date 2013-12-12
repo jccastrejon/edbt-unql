@@ -29,7 +29,7 @@ that require data from both data stores, how scalable your solution is, etc.
 
 2. Guide to language extension 
 ---------------------
-	- Visit: https://drive.google.com/file/d/0B2SdlgBOyP0aZE5PWFNGR1BpaWM/edit?usp=sharing
+	- Visit: https://drive.google.com/file/d/0B2SdlgBOyP0aYmRTUk54eUR6NXc/edit?usp=sharing
 
 ## 3. Environment configuration ##
 
